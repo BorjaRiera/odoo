@@ -771,7 +771,7 @@ class Task(models.Model):
     def _compute_recurrence_message(self):
         self.recurrence_message = False
         for task in self.filtered(lambda t: t.recurring_task and t._is_recurrence_valid()):
-            date = self._get_recurrence_start_date()
+            date = task._get_recurrence_start_date()
             number_occurrences = min(5, task.repeat_number if task.repeat_type == 'after' else 5)
             delta = task.repeat_interval if task.repeat_unit == 'day' else 1
             recurring_dates = self.env['project.task.recurrence']._get_next_recurring_dates(
@@ -1222,11 +1222,17 @@ class Task(models.Model):
         self.ensure_one()
 
         project_user_group_id = self.env.ref('project.group_project_user').id
+        project_manager_group_id = self.env.ref('project.group_project_manager').id
 
         group_func = lambda pdata: pdata['type'] == 'user' and project_user_group_id in pdata['groups']
         if self.project_id.privacy_visibility == 'followers':
             allowed_user_ids = self.project_id.allowed_internal_user_ids.partner_id.ids
-            group_func = lambda pdata: pdata['type'] == 'user' and project_user_group_id in pdata['groups'] and pdata['id'] in allowed_user_ids
+            group_func = lambda pdata:\
+                pdata['type'] == 'user'\
+                and (
+                        project_manager_group_id in pdata['groups']\
+                        or (project_user_group_id in pdata['groups'] and pdata['id'] in allowed_user_ids)
+                )
         new_group = ('group_project_user', group_func, {})
 
         if not self.user_id and not self.stage_id.fold:
