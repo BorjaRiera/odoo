@@ -458,7 +458,7 @@ class PosOrder(models.Model):
                 maxDiff = currency.round(self.config_id.rounding_method.rounding)
 
             diff = currency.round(self.amount_total - self.amount_paid)
-            if not abs(diff) < maxDiff:
+            if not abs(diff) <= maxDiff:
                 raise UserError(_("Order %s is not fully paid.", self.name))
 
         self.write({'state': 'paid'})
@@ -633,7 +633,6 @@ class PosOrder(models.Model):
             'datas': ticket,
             'res_model': 'pos.order',
             'res_id': self.ids[0],
-            'store_fname': filename,
             'mimetype': 'image/jpeg',
         })
         mail_values = {
@@ -652,7 +651,6 @@ class PosOrder(models.Model):
                 'name': filename,
                 'type': 'binary',
                 'datas': base64.b64encode(report[0]),
-                'store_fname': filename,
                 'res_model': 'pos.order',
                 'res_id': self.ids[0],
                 'mimetype': 'application/x-pdf'

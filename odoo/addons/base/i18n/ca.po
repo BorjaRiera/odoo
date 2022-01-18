@@ -15589,6 +15589,12 @@ msgid "Invalid model name %r in action definition."
 msgstr "Nom de model %r no vàlid en la definició de l'acció."
 
 #. module: base
+#: code:addons/base/models/ir_actions.py:611
+#, python-format
+msgid "many2many fields cannot be evaluated by reference"
+msgstr ""
+
+#. module: base
 #: code:addons/template_inheritance.py:0
 #, python-format
 msgid "Invalid position attribute: '%s'"
@@ -17212,7 +17218,7 @@ msgstr "Màrqueting"
 #: model:ir.module.category,name:base.module_category_marketing_marketing_automation
 #: model:ir.module.module,shortdesc:base.module_marketing_automation
 msgid "Marketing Automation"
-msgstr ""
+msgstr "Automatització de màrqueting"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_test_marketing_automation
@@ -21760,7 +21766,7 @@ msgstr "Camp relacionat"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__relation
 msgid "Related Model"
-msgstr ""
+msgstr "Model relacionat"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__partner_id
