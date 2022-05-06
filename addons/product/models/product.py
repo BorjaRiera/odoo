@@ -112,7 +112,7 @@ class ProductProduct(models.Model):
         digits='Product Price',
         groups="base.group_user",
         help="""In Standard Price & AVCO: value of the product (automatically computed in AVCO).
-        In FIFO: value of the last unit that left the stock (automatically computed).
+        In FIFO: value of the next unit that will leave the stock (automatically computed).
         Used to value the product when the purchase cost is not known (e.g. inventory adjustment).
         Used to compute margins on sale orders.""")
     volume = fields.Float('Volume', digits='Volume')
@@ -777,3 +777,9 @@ class SupplierInfo(models.Model):
             'label': _('Import Template for Vendor Pricelists'),
             'template': '/product/static/xls/product_supplierinfo.xls'
         }]
+
+    @api.constrains('product_id', 'product_tmpl_id')
+    def _check_product_variant(self):
+        for supplier in self:
+            if supplier.product_id and supplier.product_tmpl_id and supplier.product_id.product_tmpl_id != supplier.product_tmpl_id:
+                raise ValidationError(_('The product variant must be a variant of the product template.'))
