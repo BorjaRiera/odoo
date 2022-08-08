@@ -9,7 +9,7 @@
 # Bohdan Lisnenko, 2020
 # ТАрас <tratatuta@i.ua>, 2020
 # Ostap Yakovenko <ostap.yakovenko@maao.com.ua>, 2020
-# Martin Trigaux, 2021
+# Martin Trigaux, 2022
 # Alina Lisnenko <alinasemeniuk1@gmail.com>, 2022
 # 
 msgid ""
@@ -50,18 +50,20 @@ msgstr "\"URL\" не може бути пустою."
 #, python-format
 msgid "\"URL to\" cannot contain parameter %s which is not used in \"URL from\"."
 msgstr ""
+"\"URL to\" не може містити параметр %s, який не використовується в \"URL "
+"from\"."
 
 #. module: website
 #: code:addons/website/models/website_rewrite.py:0
 #, python-format
 msgid "\"URL to\" is invalid: %s"
-msgstr ""
+msgstr "\"URL to\" недійсний: %s"
 
 #. module: website
 #: code:addons/website/models/website_rewrite.py:0
 #, python-format
 msgid "\"URL to\" must contain parameter %s used in \"URL from\"."
-msgstr ""
+msgstr "\"URL to\" повинен містити параметр %s, що використовується в \"URL from\"."
 
 #. module: website
 #: code:addons/website/models/website_rewrite.py:0
@@ -169,7 +171,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.template_header_sidebar_oe_structure_header_sidebar_1
 #: model_terms:ir.ui.view,arch_db:website.template_header_vertical_oe_structure_header_vertical_2
 msgid "+1 (650) 555-0111"
-msgstr ""
+msgstr "+1 (650) 555-0111"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
@@ -1973,7 +1975,7 @@ msgstr "Перевірте ваші налаштування."
 #: code:addons/website/static/src/js/editor/snippets.editor.js:0
 #, python-format
 msgid "Check your connection and try again"
-msgstr ""
+msgstr "Перевірте ваше з'єднання та спробуйте знову"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_product_catalog
@@ -2380,6 +2382,7 @@ msgstr "Відлік закінчився - Firework"
 #. module: website
 #: code:addons/website/models/website.py:0
 #: model:ir.filters,name:website.dynamic_snippet_country_filter
+#: model:website.snippet.filter,name:website.dynamic_snippet_data_source_country
 #, python-format
 msgid "Countries"
 msgstr "Країни"
@@ -3028,7 +3031,7 @@ msgstr "Пончик"
 #, python-format
 msgid ""
 "Drag the <b>%s</b> building block and drop it at the bottom of the page."
-msgstr ""
+msgstr "Перетягніть конструкторський блок <b>%s</b> вниз сторінки."
 
 #. module: website
 #. openerp-web
@@ -3811,6 +3814,23 @@ msgstr "Ключ API Google Maps"
 #: model:ir.model.fields,field_description:website.field_website__google_search_console
 msgid "Google Search Console"
 msgstr "Консоль Google Search"
+
+#. module: website
+#. openerp-web
+#: code:addons/website/static/src/xml/website.backend.xml:0
+#, python-format
+msgid ""
+"Google deprecated both its \"Universal Analytics\" and \"Google Sign-In\" "
+"API. It means that only accounts and keys created before 2020 will be able "
+"to integrate their Analytics dashboard in Odoo (or any other website). This "
+"will be possible only up to mid 2023. After that, those services won't work "
+"anymore, at all."
+msgstr ""
+"Google припинив підтримку API «Universal Analytics» і «Google Sign-In». Це "
+"означає, що лише облікові записи та ключі, створені до 2020 року, зможуть "
+"інтегрувати свою інформаційну панель Analytics в Odoo (або будь-який інший "
+"веб-сайт). Це буде можливо лише до середини 2023 року, після чого ці сервіси"
+" взагалі не працюватимуть."
 
 #. module: website
 #: model:ir.model.fields,help:website.field_res_config_settings__google_search_console
@@ -5338,6 +5358,18 @@ msgstr "Сторінка відмови від Network Advertising Initiative"
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
 msgid "New"
 msgstr "Нова"
+
+#. module: website
+#. openerp-web
+#: code:addons/website/static/src/xml/website.backend.xml:0
+#, python-format
+msgid ""
+"New Google Analytics accounts and keys are now using Google Analytics 4 "
+"which, for now, can't be integrated/embed in external websites."
+msgstr ""
+"Нові облікові записи та ключі Google Analytics тепер використовують Google "
+"Analytics 4, який наразі не можна інтегрувати/вставити на зовнішні веб-"
+"сайти."
 
 #. module: website
 #. openerp-web
@@ -7419,6 +7451,12 @@ msgid "This page"
 msgstr "Ця сторінка"
 
 #. module: website
+#: code:addons/website/models/website_visitor.py:0
+#, python-format
+msgid "This operator is not supported"
+msgstr "Цей оператор не підтримується"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.page_404
 msgid ""
 "This page does not exist, but you can create it as you are administrator of "
@@ -7449,6 +7487,17 @@ msgstr ""
 "Це значення буде екрановано, щоб відповідати всім основним браузерам і "
 "використовуватися в URL-адресі. Залиште його порожнім, щоб використовувати "
 "назву запису за замовчуванням."
+
+#. module: website
+#. openerp-web
+#: code:addons/website/static/src/xml/website.backend.xml:0
+#, python-format
+msgid ""
+"Those accounts should now check their Analytics dashboard in the Google "
+"platform directly."
+msgstr ""
+"Тепер ці облікові записи мають перевіряти свою інформаційну панель Analytics"
+" безпосередньо на платформі Google."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_image_gallery_options
@@ -9059,7 +9108,7 @@ msgstr "https://fonts.google.com/specimen/Roboto"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
 msgid "https://www.odoo.com"
-msgstr ""
+msgstr "https://www.odoo.com"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.cookie_policy

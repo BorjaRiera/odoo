@@ -934,7 +934,7 @@ var FieldDate = InputField.extend({
             let value = this.$input.val();
             try {
                 value = this._parseValue(value);
-                if (this.field.type === "datetime") {
+                if (this.datewidget.type_of_date === "datetime") {
                     value.add(-this.getSession().getTZOffset(value), "minutes");
                 }
             } catch (err) {}
@@ -2674,8 +2674,20 @@ var BooleanToggle = FieldBoolean.extend({
      */
     _onClick: function (event) {
         event.stopPropagation();
-        this._setValue(!this.value);
+        if (!this.$input.prop('disabled')) {
+            this._setValue(!this.value);
+        }
     },
+
+    /**
+     * The boolean_toggle should only be disabled when there is a readonly modifier
+     * not when the view is in readonly mode
+     */
+    _render: function() {
+        this._super.apply(this, arguments);
+        const isReadonly = this.record.evalModifiers(this.attrs.modifiers).readonly || false;
+        this.$input.prop('disabled', isReadonly);
+    }
 });
 
 var StatInfo = AbstractField.extend({

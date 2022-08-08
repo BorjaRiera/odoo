@@ -41,7 +41,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_at_reports
@@ -2202,6 +2202,8 @@ msgid ""
 "Allows to make call from next activities or with click-to-dial.\n"
 "    "
 msgstr ""
+"\n"
+"Ermöglicht das Tätigen von Anrufen aus den nächsten Aktivitäten oder mit Click-to-Dial."
 
 #. module: base
 #: model:ir.module.module,description:base.module_sale_timesheet
@@ -10125,12 +10127,12 @@ msgstr "Applica"
 #: model_terms:ir.ui.view,arch_db:base.view_base_module_upgrade_install
 #, python-format
 msgid "Apply Schedule Upgrade"
-msgstr "Esecuzione aggiornamento programmato"
+msgstr "Applica aggiornamento programmato"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_view_base_module_upgrade
 msgid "Apply Scheduled Upgrades"
-msgstr "Esecuzione aggiornamento programmato"
+msgstr "Applica aggiornamenti programmati"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_rule__perm_create
@@ -10377,7 +10379,7 @@ msgstr "Presenze"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hr_attendance_mobile
 msgid "Attendances Barcode in Mobile"
-msgstr "Codice a barre delle presenze su dispositivo mobile"
+msgstr "Codice a barre presenze su dispositivo mobile"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_hr_attendance_mobile
@@ -10713,7 +10715,7 @@ msgstr "Codice a barre"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_stock_barcode_quality_control
 msgid "Barcode Quality bridge module"
-msgstr "Modulo bridge tra codice a barre e qualità"
+msgstr "Modulo ponte tra codice a barre e qualità"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_stock_barcode_picking_batch
@@ -10723,7 +10725,7 @@ msgstr "Codice a barre per trasferimento raggruppato"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_barcodes_mobile
 msgid "Barcode in Mobile"
-msgstr "Codici a barre da dispositivo mobile"
+msgstr "Codice a barre su dispositivo mobile"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_barcodes_mobile
@@ -10745,7 +10747,7 @@ msgstr "Tipo di codice a barre, es.: UPCA, EAN13, Code128"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_stock_barcode_quality_control_picking_batch
 msgid "Barcode/Quality/Batch Transfer bridge module"
-msgstr "Modulo bridge tra codice a barre, qualità e trasferimento raggruppato"
+msgstr "Modulo ponte tra codice a barre, qualità e trasferimento raggruppato"
 
 #. module: base
 #: model:ir.model,name:base.model_base
@@ -10861,6 +10863,8 @@ msgid ""
 "Be aware that editing the architecture of a standard view is not advised, since the changes will be overwritten during future module updates.<br/>\n"
 "                        We recommend applying modifications to standard views through inherited views or customization with Odoo Studio."
 msgstr ""
+"Bitte beachten Sie, dass es nicht ratsam ist, die Architektur einer Standardansicht zu bearbeiten, da die Änderungen bei zukünftigen Modul-Updates überschrieben werden.<br/>\n"
+"Wir empfehlen, Änderungen an Standardansichten über geerbte Ansichten oder Anpassungen mit Odoo Studio vorzunehmen."
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_country__name_position__before
@@ -13326,7 +13330,7 @@ msgstr "Definisce le imposte come codice Python"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.module_form
 msgid "Defined Reports"
-msgstr "Rendiconti specifici"
+msgstr "Report specifici"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_web_map
@@ -14489,7 +14493,7 @@ msgstr "Lettura codici a barre per eventi"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_event_barcode_mobile
 msgid "Event Barcode in Mobile"
-msgstr "Codice a barre eventi su dispositivo mobile"
+msgstr "Codice a barre per eventi su dispositivo mobile"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_event_barcode_mobile
@@ -23699,7 +23703,7 @@ msgstr "Campo QWeb"
 #. module: base
 #: model:ir.model,name:base.model_ir_qweb_field_barcode
 msgid "Qweb Field Barcode"
-msgstr "Campo qweb barcode"
+msgstr "Campo QWeb codice a barre"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_qweb_field_contact
@@ -28185,7 +28189,7 @@ msgstr "Usa un codice a barre per identificare questo contatto."
 #: model:ir.module.module,summary:base.module_stock_barcode
 msgid "Use barcode scanners to process logistics operations"
 msgstr ""
-"Utilizzare lettori di codici a barre per elaborare le operazioni logistiche"
+"Utilizzo di lettori di codice a barre per elaborare operazioni di logistica"
 
 #. module: base
 #: code:addons/base/models/ir_qweb_fields.py:0

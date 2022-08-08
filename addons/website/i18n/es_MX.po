@@ -5,6 +5,7 @@
 # Translators:
 # Cécile Collart <cco@odoo.com>, 2021
 # Patricia Gutiérrez Capetillo <pagc@odoo.com>, 2021
+# Martin Trigaux, 2022
 # Braulio D. López Vázquez <bdl@odoo.com>, 2022
 # 
 msgid ""
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: es_MX\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. module: website
 #. openerp-web
@@ -863,8 +864,8 @@ msgid ""
 "<span class=\"o_footer_copyright_name mr-2\">Copyright &amp;copy; Company "
 "name</span>"
 msgstr ""
-"<span class=\"o_footer_copyright_name mr-2\">Derechos de autor &amp;copy; "
-"nombre de la empresa</span>"
+"<span class=\"o_footer_copyright_name mr-2\">Derechos de autor y nombre de "
+"la empresa</span>"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
@@ -2394,6 +2395,7 @@ msgstr "El contador ha acabado - Fuegos artificiales"
 #. module: website
 #: code:addons/website/models/website.py:0
 #: model:ir.filters,name:website.dynamic_snippet_country_filter
+#: model:website.snippet.filter,name:website.dynamic_snippet_data_source_country
 #, python-format
 msgid "Countries"
 msgstr "Países"
@@ -3828,6 +3830,23 @@ msgstr "Clave API de Google Maps"
 #: model:ir.model.fields,field_description:website.field_website__google_search_console
 msgid "Google Search Console"
 msgstr "Consola de búsqueda de Google"
+
+#. module: website
+#. openerp-web
+#: code:addons/website/static/src/xml/website.backend.xml:0
+#, python-format
+msgid ""
+"Google deprecated both its \"Universal Analytics\" and \"Google Sign-In\" "
+"API. It means that only accounts and keys created before 2020 will be able "
+"to integrate their Analytics dashboard in Odoo (or any other website). This "
+"will be possible only up to mid 2023. After that, those services won't work "
+"anymore, at all."
+msgstr ""
+"Google hizo obsoletos tanto a su \"Universal Analytics\" como su API "
+"\"Inicio de sesión en Google\". Esto significa que solo las cuentas y claves"
+" creadas antes de 2020 podrán integrar su tablero de Analytics en Odoo (o "
+"cualquier otro sitio web). Esto será posible solo hasta mediados de 2023. "
+"Después de eso, esos servicios ya no funcionarán, en absoluto."
 
 #. module: website
 #: model:ir.model.fields,help:website.field_res_config_settings__google_search_console
@@ -5358,6 +5377,17 @@ msgstr "Página de exclusión de la Network Advertising Initiative"
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
 msgid "New"
 msgstr "Nuevo"
+
+#. module: website
+#. openerp-web
+#: code:addons/website/static/src/xml/website.backend.xml:0
+#, python-format
+msgid ""
+"New Google Analytics accounts and keys are now using Google Analytics 4 "
+"which, for now, can't be integrated/embed in external websites."
+msgstr ""
+"Las nuevas cuentas y claves de Google Analytics utilizan Google Analytics 4 "
+"que, por ahora, no se puede integrar/insertar en sitios web externos."
 
 #. module: website
 #. openerp-web
@@ -7448,6 +7478,12 @@ msgid "This page"
 msgstr "Esta página"
 
 #. module: website
+#: code:addons/website/models/website_visitor.py:0
+#, python-format
+msgid "This operator is not supported"
+msgstr "Este operador no es compatible"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.page_404
 msgid ""
 "This page does not exist, but you can create it as you are administrator of "
@@ -7478,6 +7514,17 @@ msgstr ""
 "Este valor se escapará para que sea compatible con la mayoría de navegadores"
 " y se use en el URL. Manténgalo vacío para utilizar el nombre predeterminado"
 " del registro."
+
+#. module: website
+#. openerp-web
+#: code:addons/website/static/src/xml/website.backend.xml:0
+#, python-format
+msgid ""
+"Those accounts should now check their Analytics dashboard in the Google "
+"platform directly."
+msgstr ""
+"Esas cuentas ahora deben revisar su tablero de Analytics directamente en la "
+"plataforma de Google."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_image_gallery_options
