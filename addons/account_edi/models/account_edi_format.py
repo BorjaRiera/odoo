@@ -8,6 +8,7 @@ from odoo.tools import html_escape
 from odoo.exceptions import RedirectWarning
 
 from lxml import etree
+from struct import error as StructError
 import base64
 import io
 import logging
@@ -393,7 +394,7 @@ class AccountEdiFormat(models.Model):
         try:
             for xml_name, content in pdf_reader.getAttachments():
                 to_process.extend(self._decode_xml(xml_name, content))
-        except NotImplementedError as e:
+        except (NotImplementedError, StructError) as e:
             _logger.warning("Unable to access the attachments of %s. Tried to decrypt it, but %s." % (filename, e))
 
         # Process the pdf itself.
@@ -625,6 +626,9 @@ class AccountEdiFormat(models.Model):
         :param barcode:         The barcode of the product.
         :returns:               A product or an empty recordset if not found.
         '''
+        if name and '\n' in name:
+            # cut Sales Description from the name
+            name = name.split('\n')[0]
         domains = []
         for value, domain in (
             (name, ('name', 'ilike', name)),

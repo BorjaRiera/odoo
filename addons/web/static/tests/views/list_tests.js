@@ -4453,6 +4453,30 @@ QUnit.module('Views', {
         list.destroy();
     });
 
+    QUnit.test('list with group_by_no_leaf and group by', async function (assert) {
+        assert.expect(4);
+
+        const list = await createView({
+            View: ListView,
+            model: 'foo',
+            data: this.data,
+            arch: '<tree expand="1"><field name="foo"/></tree>',
+            groupBy: ['currency_id'],
+            context: { group_by_no_leaf: true },
+        });
+        const groups = list.el.querySelectorAll(".o_group_name");
+        const groupsRecords = [...list.el.querySelectorAll(".o_data_row .o_data_cell")];
+
+        assert.strictEqual(groups.length, 2, "There should be 2 groups");
+        assert.strictEqual(groups[0].textContent, "EUR (1)", "First group should have 1 record");
+        assert.strictEqual(groups[1].textContent, "USD (3)", "Second group should have 3 records");
+        assert.deepEqual(
+            groupsRecords.map(groupEl => groupEl.textContent),
+            ["yop", "blip", "gnap", "blip"],
+            "Groups should contains correct records");
+        list.destroy();
+    });
+
     QUnit.test("non empty list with sample data", async function (assert) {
         assert.expect(6);
 
@@ -11785,6 +11809,54 @@ QUnit.module('Views', {
         assert.ok($('table.o_list_table > tbody > tr:eq(1)')[0].classList.contains('o_selected_row'), "The second row should be selected")
 
         list.destroy();
+    });
+
+    QUnit.test('quickly setting row mode with owl_compatibility', async function (assert) {
+        assert.expect(3);
+
+        this.data.bar.fields.bool = { string: 'bool', type: 'boolean' };
+        this.data.foo.records[0].o2m = [1, 2, 3];
+
+        const form = await createView({
+            View: FormView,
+            model: 'foo',
+            data: this.data,
+            res_id: 1,
+            viewOptions: { mode: 'edit' },
+            arch: `<form>
+                <sheet>
+                    <notebook>
+                        <page>
+                            <field name="o2m">
+                                <tree editable="bottom">
+                                    <field name="bool"/>
+                                    <field name="display_name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>`,
+        });
+
+        await testUtils.dom.click(form.$('tbody tr:eq(0) td:eq(1)'));
+        await testUtils.fields.editInput(form.$('input[name=display_name]'), 'another value');
+
+        // Double-click on a field of the second row
+        testUtils.dom.click(form.$('tbody tr:eq(1) td:eq(1)'));
+        testUtils.dom.click(form.$('tbody tr:eq(1) td:eq(1)'));
+        await testUtils.nextTick();
+        await testUtils.nextTick();
+
+        assert.strictEqual(
+            form.el.querySelector('tr:nth-child(1) > td.o_data_cell.o_field_cell.o_list_char').textContent,
+            'another value');
+
+        const rows = form.$('.o_data_row .o_list_char');
+        assert.containsNone(rows[0], 'input'); // this means that the first row is saved
+        assert.containsOnce(rows[1], 'input'); // this means that the second row is in edit mode
+
+        form.destroy();
     });
 
 });

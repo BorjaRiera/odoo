@@ -839,6 +839,7 @@ Reason(s) of this behavior could be:
         return False
 
     def _find_mail_template(self, force_confirmation_template=False):
+        self.ensure_one()
         template_id = False
 
         if force_confirmation_template or (self.state == 'sale' and not self.env.context.get('proforma', False)):
@@ -899,9 +900,9 @@ Reason(s) of this behavior could be:
         if self.env.su:
             # sending mail in sudo was meant for it being sent from superuser
             self = self.with_user(SUPERUSER_ID)
-        template_id = self._find_mail_template(force_confirmation_template=True)
-        if template_id:
-            for order in self:
+        for order in self:
+            template_id = order._find_mail_template(force_confirmation_template=True)
+            if template_id:
                 order.with_context(force_send=True).message_post_with_template(template_id, composition_mode='comment', email_layout_xmlid="mail.mail_notification_paynow")
 
     def action_done(self):
@@ -996,6 +997,12 @@ Reason(s) of this behavior could be:
                             res[group]['amount'] += t['amount']
                             res[group]['base'] += t['base']
             res = sorted(res.items(), key=lambda l: l[0].sequence)
+
+            # round amount and prevent -0.00
+            for group_data in res:
+                group_data[1]['amount'] = currency.round(group_data[1]['amount']) + 0.0
+                group_data[1]['base'] = currency.round(group_data[1]['base']) + 0.0
+
             order.amount_by_group = [(
                 l[0].name, l[1]['amount'], l[1]['base'],
                 fmt(l[1]['amount']), fmt(l[1]['base']),
@@ -1214,8 +1221,6 @@ class SaleOrderLine(models.Model):
                 'price_total': taxes['total_included'],
                 'price_subtotal': taxes['total_excluded'],
             })
-            if self.env.context.get('import_file', False) and not self.env.user.user_has_groups('account.group_account_manager'):
-                line.tax_id.invalidate_cache(['invoice_repartition_line_ids'], [line.tax_id.id])
 
     @api.depends('product_id', 'order_id.state', 'qty_invoiced', 'qty_delivered')
     def _compute_product_updatable(self):
@@ -1613,7 +1618,7 @@ class SaleOrderLine(models.Model):
     @api.depends('product_id', 'order_id.date_order', 'order_id.partner_id')
     def _compute_analytic_tag_ids(self):
         for line in self:
-            if not line.analytic_tag_ids:
+            if not line.display_type and line.state == 'draft':
                 default_analytic_account = line.env['account.analytic.default'].sudo().account_get(
                     product_id=line.product_id.id,
                     partner_id=line.order_id.partner_id.id,
@@ -1653,7 +1658,7 @@ class SaleOrderLine(models.Model):
             'discount': self.discount,
             'price_unit': self.price_unit,
             'tax_ids': [(6, 0, self.tax_id.ids)],
-            'analytic_account_id': self.order_id.analytic_account_id.id,
+            'analytic_account_id': self.order_id.analytic_account_id.id if not self.display_type else False,
             'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
             'sale_line_ids': [(4, self.id)],
         }

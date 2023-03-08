@@ -1523,7 +1523,7 @@ msgstr ""
 #. module: event
 #: model:ir.model,name:event.model_event_stage
 msgid "Event Stage"
-msgstr ""
+msgstr "Veranstaltungsphase"
 
 #. module: event
 #: model:ir.actions.act_window,name:event.event_stage_action
@@ -1821,7 +1821,7 @@ msgstr "Inspiriert werden • in Verbindung bleiben • Spaß haben"
 #. module: event
 #: model:event.event,name:event.event_1
 msgid "Great Reno Ballon Race"
-msgstr ""
+msgstr "Großes Ballonrennen von Reno"
 
 #. module: event
 #. openerp-web
